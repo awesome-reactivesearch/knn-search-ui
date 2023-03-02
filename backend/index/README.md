@@ -39,3 +39,7 @@ The pipeline is defined with the following stages:
 - **authorize user**: Use the pre-built stage `authorization` to authorize the user
 - **fetch embeddings**: Use the pre-built stage `openAIEmbeddingsIndex` to fetch the embeddings for the passed body. Here the fields that are vectorized are passed in the `inputKeys` value. This array can contain any valid field name that will be vectorized by reading from the body. The fields passed in this should be of type `string`.
 - **index data**: This stage uses the pre-built stage `elasticsearchQuery` to index the data into ElasticSearch by making a `/_doc` call.
+
+## Helper Script
+
+After the indexing pipeline is setup, it might be a chore to index the data into the index. Keeping this in mind, we have provided an utility script that can be used to index the data by just running it once. [Read more about it here](./util/README.md)
