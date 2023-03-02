@@ -10,7 +10,7 @@ Two pipelines are created here. One to index the data (with vectorization). One 
 
 The [Amazon Reviews](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews) data set is used for this example that includes food reviews across Amazon. Two important fields from the dataset are `Text` and `Summary` which indicate the complete review and the summary of the review. We will index these two values as vector data and then run the query on top of them.
 
-These fields can be changed according to the functionality of the app, this will be explained in the [indexing pipeline](./index/README.md).
+These fields can be changed according to the functionality of the app, this will be explained in the [indexing pipeline](./index/).
 
 ### Index Pipeline
 
@@ -21,13 +21,13 @@ Index pipeline is just an usual indexing pipeline that indexes data to ElasticSe
 
 Above fields are stored as `knn_vector` so that it can be utilized for kNN searching during the querying phase.
 
-**[Read More](./index/README.md)**
+**[Read More](./index/)**
 
 ### Search Pipeline
 
 Search Pipeline adds an extra step that generates the vector representation of the passed query and accordingly passes it to OpenSearch.
 
-**[Read More](./search/README.md)**
+**[Read More](./search/)**
 
 ### Requirements
 
