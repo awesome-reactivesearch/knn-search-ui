@@ -46,4 +46,4 @@ The pipeline is defined with the following stages:
 
 ## Helper Script
 
-After the indexing pipeline is setup, it might be a chore to index the data into the index. Keeping this in mind, we have provided an utility script that can be used to index the data by just running it once. [Read more about it here](./util/README.md)
+After the indexing pipeline is setup, it might be a chore to index the data into the index. Keeping this in mind, we have provided an utility script that can be used to index the data by just running it once. [Read more about it here](./util/)
