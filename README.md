@@ -16,7 +16,7 @@ The pipelines are automatically deployed from this repository by using the [pipe
 
 ## Index Pipeline
 
-As explained above, an indexing pipeline is defined that automatically adds vector data for the `Name` and `Description` fields and saves them as `dense_vector` in ElasticSearch. These vectors are calculated using the [bert-as-service](https://github.com/hanxiao/bert-as-service) API.
+As explained above, an indexing pipeline is defined that automatically adds vector data for the `Text` and `Summary` fields and saves them as `knn_vector` in OpenSearch. These vectors are calculated using the [OpenAI's Embedding API](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings).
 
 [Read more about this pipeline in the index directory](./backend/index/)
 
