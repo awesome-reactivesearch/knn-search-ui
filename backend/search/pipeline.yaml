@@ -1,0 +1,25 @@
+enabled: true
+routes:
+- path: "/amazon_reviews/_reactivesearch"
+  method: POST
+  classify:
+    category: reactivesearch
+
+envs:
+  openAIApiKey: ${{ OPENAI_API_KEY }}
+
+stages:
+- id: authorize user
+  use: authorization
+- id: fetch embeddings
+  use: openAIEmbeddings
+  inputs:
+    apiKey: "{{openAIApiKey}}"
+    useWithReactiveSearchQuery: true
+  continueOnError: false
+- use: reactivesearchQuery
+  needs:
+  - fetch embeddings
+  continueOnError: false
+- use: elasticsearchQuery
+  continueOnError: false

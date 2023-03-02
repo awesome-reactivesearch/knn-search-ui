@@ -1,0 +1,29 @@
+enabled: true
+description: Index pipeline to store vectorized data
+
+routes:
+  - path: /amazon_reviews/_doc
+    method: POST
+    classify:
+      category: elasticsearch
+      acl: index
+
+envs:
+  openAIApiKey: ${{ OPENAI_API_KEY }}
+
+stages:
+- id: authorize user
+  use: authorization
+- id: fetch embeddings
+  use: openAIEmbeddingsIndex
+  inputs:
+    apiKey: "{{openAIApiKey}}"
+    inputKeys:
+    - Summary
+    - Text
+    outputKey: vector_data
+  continueOnError: false
+- id: index data
+  use: elasticsearchQuery
+  needs:
+  - fetch embeddings
