@@ -32,7 +32,11 @@ curl --location --request PUT 'https://{{host}}:{{port}}/amazon_reviews' \
 
 > In the above, change the host with the host and the port with the port where OpenSearch is listening to.
 
-## Files Used
+## Envs
+
+In order for this pipeline to run properly, the OpenAI Embeddings API's API Key will have to be specified in the envs. This can be fetched from the OpenAI dashboard by signing up.
+
+## Stages Used
 
 The pipeline is defined with the following stages:
 
