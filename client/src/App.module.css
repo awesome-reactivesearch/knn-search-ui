@@ -1,0 +1,12 @@
+.spinner {
+  position: fixed;
+  height: 80vh;
+  top: 160px;
+  left: 0px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  z-index: 1;
+  background-color: white;
+}
