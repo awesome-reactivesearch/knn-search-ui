@@ -15,3 +15,14 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
 }
+.headingTag {
+  background: linear-gradient(
+    30deg,
+    rgb(59, 130, 246) 0%,
+    rgb(59, 130, 246) 0%,
+    rgb(255, 42, 111) 100%
+  );
+  margin-right: auto;
+  border-radius: var(--bs-border-radius);
+  padding: 5px 10px;
+}

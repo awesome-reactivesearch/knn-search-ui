@@ -39,23 +39,15 @@ function Main() {
       }}
       transformRequest={(req) => {
         const body = JSON.parse(req.body);
-        body.query = body.query
-          .map((q) => {
-            if (q.id === "SearchComponent") {
-              if (q.type === "suggestion") {
-                return {
-                  ...q,
-                  vectorDataField: "vector_data",
-                  type: "search",
-                  id: "SearchResult",
-                };
-              } else if (q.type === "search") {
-                return { ...q, vectorDataField: "vector_data" };
-              }
-            }
-            return q;
-          })
-          .filter((q) => q);
+        body.query = body.query.map((componentQuery) => {
+          if (
+            componentQuery.id === "SearchComponent" &&
+            componentQuery.type === "search"
+          ) {
+            return { ...componentQuery, vectorDataField: "vector_data" };
+          }
+          return componentQuery;
+        });
         body.settings = {
           recordAnalytics: false,
           backend: "opensearch",
@@ -64,18 +56,11 @@ function Main() {
         return newReq;
       }}
     >
-      <Navbar
-        style={{
-          background:
-            "linear-gradient(30deg, rgba(59,130,246,1) 0%, rgba(59,130,246,1) 0%, rgba(255,42,111,1) 100%)",
-        }}
-        bg="primary"
-        expand="lg"
-      >
+      <Navbar bg="white" className="shadow" expand="lg">
         <Container>
-          <Navbar.Brand className="text-white">
-            Reactivesearch | KNN Search
-          </Navbar.Brand>
+          <Navbar.Brand>Reactivesearch</Navbar.Brand>
+          <span className={`text-white ${styles.headingTag}`}>KNN Search</span>
+          <a href="">How this is built</a>
         </Container>
       </Navbar>
 
@@ -126,9 +111,7 @@ function Main() {
         size={12}
         className="m-5 position-relative"
         pagination
-        react={{
-          and: "SearchComponent",
-        }}
+        react={{ and: "SearchComponent" }}
         loader={
           <div className={styles.spinner}>
             <Spinner animation="border" variant="primary" />
