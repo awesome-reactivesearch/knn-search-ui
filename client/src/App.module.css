@@ -1,8 +1,7 @@
 .spinner {
-  position: fixed;
+  position: absolute;
   height: 80vh;
-  top: 160px;
-  left: 0px;
+  left: -100px;
   width: 100vw;
   display: flex;
   justify-content: center;
