@@ -133,7 +133,7 @@ function Main() {
         componentId="SearchResult"
         dataField="Summary"
         size={12}
-        className="m-5 position-relative"
+        className="position-relative"
         pagination
         react={{ and: "SearchComponent" }}
         loader={
@@ -141,22 +141,31 @@ function Main() {
             <Spinner animation="border" variant="primary" />
           </div>
         }
+        renderResultStats={(stats) => {
+          return stats ? (
+            <div className="mx-5">
+              {stats.numberOfResults} results found in {stats.time}ms
+            </div>
+          ) : null;
+        }}
         render={({ data }) => {
           return (
-            <div className="row row-cols-1 row-cols-sm-3 row-cols-md-5">
-              {data.map((item) => (
-                <Card className="col m-1" key={item._id}>
-                  <Card.Body>
-                    <Card.Title>{item["Summary"]}</Card.Title>
-                    <Card.Text
-                      className={styles.description}
-                      dangerouslySetInnerHTML={{
-                        __html: sanitize(item["Text"]),
-                      }}
-                    />
-                  </Card.Body>
-                </Card>
-              ))}
+            <div className="mx-5 my-2">
+              <div className="row row-cols-1 row-cols-sm-3 row-cols-md-5">
+                {data.map((item) => (
+                  <Card className="col m-1" key={item._id}>
+                    <Card.Body>
+                      <Card.Title>{item["Summary"]}</Card.Title>
+                      <Card.Text
+                        className={styles.description}
+                        dangerouslySetInnerHTML={{
+                          __html: sanitize(item["Text"]),
+                        }}
+                      />
+                    </Card.Body>
+                  </Card>
+                ))}
+              </div>
             </div>
           );
         }}
