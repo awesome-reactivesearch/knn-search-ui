@@ -96,7 +96,7 @@ function Main() {
       <SearchBox
         dataField={["Summary"]}
         componentId="SearchComponent"
-        className="m-5"
+        className="mx-5"
         size={5}
         showClear
         value={searchValue}
@@ -106,7 +106,7 @@ function Main() {
         }}
       />
       {!searchValue ? (
-        <div className="mx-5">
+        <div className="mx-5 mt-3 mb-5">
           <p className="lead">Sample queries to try:</p>
           <div>
             {sampleQueries.map((sampleQuery) => (
