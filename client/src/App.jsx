@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Button, Card, Container, Navbar, Spinner } from "react-bootstrap";
 import {
   ReactiveBase,
@@ -11,7 +11,8 @@ import sanitize from "sanitize-html";
 
 import styles from "./App.module.css";
 
-const DEBOUNCE_DELAY = 1000;
+const SUGGESTION_DEBOUNCE_DELAY = 500;
+const QUERY_DEBOUNCE_DELAY = 1000;
 
 const sampleQueries = [
   {
@@ -27,6 +28,9 @@ const sampleQueries = [
 ];
 
 function Main() {
+  const [searchValue, setSearchValue] = useState("");
+  const timerRef = useRef();
+
   return (
     <ReactiveBase
       endpoint={{
@@ -90,39 +94,44 @@ function Main() {
       </div>
 
       <SearchBox
-        dataField={["Text"]}
+        dataField={["Summary"]}
         componentId="SearchComponent"
         className="m-5"
         size={5}
         showClear
-        debounce={DEBOUNCE_DELAY}
-        highlight={false}
-        render={({ value, downshiftProps: { getItemProps } }) =>
-          !value ? (
-            <div className="mt-3">
-              <p className="lead">Sample queries to try:</p>
-              <div>
-                {sampleQueries.map((sampleQuery) => (
-                  <Button
-                    {...getItemProps({
-                      item: sampleQuery,
-                    })}
-                    variant="outline-primary"
-                    className="me-2"
-                    key={sampleQuery.id}
-                  >
-                    {sampleQuery.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          ) : null
-        }
+        value={searchValue}
+        debounce={SUGGESTION_DEBOUNCE_DELAY}
+        onChange={(value) => {
+          setSearchValue(value);
+        }}
       />
+      {!searchValue ? (
+        <div className="mx-5">
+          <p className="lead">Sample queries to try:</p>
+          <div>
+            {sampleQueries.map((sampleQuery) => (
+              <Button
+                variant="outline-primary"
+                className="me-2"
+                key={sampleQuery.id}
+                onClick={() => {
+                  const inputEl = document.getElementById(
+                    `SearchComponent-downshift-input`
+                  );
+                  setSearchValue(sampleQuery.label);
+                  setTimeout(() => inputEl.focus());
+                }}
+              >
+                {sampleQuery.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <ReactiveList
         componentId="SearchResult"
-        dataField="Text"
+        dataField="Summary"
         size={12}
         className="m-5 position-relative"
         pagination

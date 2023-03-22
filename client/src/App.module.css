@@ -1,8 +1,8 @@
 .spinner {
   position: absolute;
   height: 80vh;
-  left: -100px;
   width: 100vw;
+  left: 0px;
   display: flex;
   justify-content: center;
   padding-top: 50px;
