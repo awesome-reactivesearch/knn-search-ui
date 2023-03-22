@@ -46,6 +46,22 @@ function Main() {
           ) {
             return { ...componentQuery, vectorDataField: "vector_data" };
           }
+          if (
+            componentQuery.id === "SearchResult" &&
+            componentQuery.type === "search"
+          ) {
+            const searchQuery = body.query.find(
+              (q) => q.id === "SearchComponent" && q.type === "search"
+            );
+            const searchValue = searchQuery.value;
+            delete componentQuery.react;
+
+            return {
+              ...componentQuery,
+              vectorDataField: "vector_data",
+              value: searchValue,
+            };
+          }
           return componentQuery;
         });
         body.settings = {
@@ -79,7 +95,6 @@ function Main() {
         className="m-5"
         size={5}
         showClear
-        renderNoSuggestion={() => "No suggestions found."}
         debounce={DEBOUNCE_DELAY}
         highlight={false}
         render={({ value, downshiftProps: { getItemProps } }) =>
