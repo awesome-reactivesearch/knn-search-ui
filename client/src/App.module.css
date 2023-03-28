@@ -24,3 +24,12 @@
   border-radius: var(--bs-border-radius);
   padding: 5px 10px;
 }
+.suggestions {
+  position: absolute;
+  z-index: 2;
+  box-shadow: #9597a1 0px 8px 24px;
+  background: white;
+  width: 100%;
+  border-radius: 0px 0px 10px 10px;
+  overflow: hidden;
+}

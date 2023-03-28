@@ -59,7 +59,7 @@ function Main() {
             const searchQuery = body.query.find(
               (q) => q.id === "SearchComponent" && q.type === "search"
             );
-            const searchValue = searchQuery.value;
+            const searchValue = searchQuery && searchQuery.value;
             delete componentQuery.react;
 
             return {
@@ -106,30 +106,113 @@ function Main() {
         onChange={(value) => {
           setSearchValue(value);
         }}
+        render={({
+          error,
+          data,
+          downshiftProps: {
+            isOpen,
+            getItemProps,
+            highlightedIndex,
+            selectedItem,
+          },
+        }) => {
+          if (isOpen && error && error.message) {
+            return (
+              <div className={`${styles.suggestions}`}>
+                <div>
+                  <p className="lead mx-2 mt-3">Sample queries to try:</p>
+                  <div>
+                    {sampleQueries.map((item, index) => (
+                      <div
+                        /* eslint-disable-next-line react/no-array-index-key */
+                        key={item.id + index}
+                        {...getItemProps({
+                          item,
+                          style: {
+                            backgroundColor:
+                              highlightedIndex === index
+                                ? "var(--bs-primary)"
+                                : "white",
+                            color:
+                              highlightedIndex === index
+                                ? "var(--bs-white)"
+                                : "var(--bs-black)",
+                            fontWeight:
+                              selectedItem === item ? "bold" : "normal",
+                            padding: "5px 15px",
+                          },
+                        })}
+                        className="listItem"
+                      >
+                        <span className="clipText">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
+          return isOpen ? (
+            <div className={`${styles.suggestions}`}>
+              <div>
+                <p className="lead mx-2 mt-3">Sample queries to try:</p>
+                <div>
+                  {sampleQueries.map((item, index) => (
+                    <div
+                      /* eslint-disable-next-line react/no-array-index-key */
+                      key={item.id + index}
+                      {...getItemProps({
+                        item,
+                        style: {
+                          backgroundColor:
+                            highlightedIndex === index
+                              ? "var(--bs-primary)"
+                              : "white",
+                          color:
+                            highlightedIndex === index
+                              ? "var(--bs-white)"
+                              : "var(--bs-black)",
+                          fontWeight: selectedItem === item ? "bold" : "normal",
+                          padding: "5px 15px",
+                        },
+                      })}
+                      className="listItem"
+                    >
+                      <span className="clipText">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <p className="lead mx-2 mt-3">Suggestions:</p>
+              {data.map((item, index) => (
+                <div
+                  /* eslint-disable-next-line react/no-array-index-key */
+                  key={item._id + index}
+                  {...getItemProps({
+                    item,
+                    style: {
+                      backgroundColor:
+                        highlightedIndex === index + sampleQueries.length
+                          ? "var(--bs-primary)"
+                          : "white",
+                      color:
+                        highlightedIndex === index + sampleQueries.length
+                          ? "var(--bs-white)"
+                          : "var(--bs-black)",
+                      fontWeight: selectedItem === item ? "bold" : "normal",
+                      padding: "5px 15px",
+                    },
+                  })}
+                  className="listItem"
+                >
+                  <span className="clipText">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          ) : null;
+        }}
       />
-      {!searchValue ? (
-        <div className="mx-5 mt-3 mb-5">
-          <p className="lead">Sample queries to try:</p>
-          <div>
-            {sampleQueries.map((sampleQuery) => (
-              <Button
-                variant="outline-primary"
-                className="me-2"
-                key={sampleQuery.id}
-                onClick={() => {
-                  const inputEl = document.getElementById(
-                    `SearchComponent-downshift-input`
-                  );
-                  setSearchValue(sampleQuery.label);
-                  setTimeout(() => inputEl.focus());
-                }}
-              >
-                {sampleQuery.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-      ) : null}
 
       <ReactiveList
         componentId="SearchResult"
