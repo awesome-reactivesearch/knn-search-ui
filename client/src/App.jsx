@@ -116,43 +116,6 @@ function Main() {
             selectedItem,
           },
         }) => {
-          if (isOpen && error && error.message) {
-            return (
-              <div className={`${styles.suggestions}`}>
-                <div>
-                  <p className="lead mx-2 mt-3">Sample queries to try:</p>
-                  <div>
-                    {sampleQueries.map((item, index) => (
-                      <div
-                        /* eslint-disable-next-line react/no-array-index-key */
-                        key={item.id + index}
-                        {...getItemProps({
-                          item,
-                          style: {
-                            backgroundColor:
-                              highlightedIndex === index
-                                ? "var(--bs-primary)"
-                                : "white",
-                            color:
-                              highlightedIndex === index
-                                ? "var(--bs-white)"
-                                : "var(--bs-black)",
-                            fontWeight:
-                              selectedItem === item ? "bold" : "normal",
-                            padding: "5px 15px",
-                          },
-                        })}
-                        className="listItem"
-                      >
-                        <span className="clipText">{item.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          }
-
           return isOpen ? (
             <div className={`${styles.suggestions}`}>
               <div>
@@ -184,7 +147,9 @@ function Main() {
                   ))}
                 </div>
               </div>
-              <p className="lead mx-2 mt-3">Suggestions:</p>
+              {data && data.length ? (
+                <p className="lead mx-2 mt-3">Suggestions:</p>
+              ) : null}
               {data.map((item, index) => (
                 <div
                   /* eslint-disable-next-line react/no-array-index-key */
