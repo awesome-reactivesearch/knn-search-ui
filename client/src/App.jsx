@@ -132,7 +132,7 @@ function Main() {
       <ReactiveList
         componentId="SearchResult"
         dataField="Summary"
-        size={12}
+        size={6}
         className="position-relative"
         pagination
         react={{ and: "SearchComponent" }}
@@ -151,9 +151,12 @@ function Main() {
         render={({ data }) => {
           return (
             <div className="mx-5 my-2">
-              <div className="row row-cols-1 row-cols-sm-3 row-cols-md-5">
+              <div className="row">
                 {data.map((item) => (
-                  <Card className="col m-1" key={item._id}>
+                  <Card
+                    className={`col-md-3 col-sm-5 col-xs-12 m-1`}
+                    key={item._id}
+                  >
                     <Card.Body>
                       <Card.Title>{item["Summary"]}</Card.Title>
                       <Card.Text

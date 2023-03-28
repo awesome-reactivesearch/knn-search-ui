@@ -10,10 +10,8 @@
   background-color: white;
 }
 .description {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 300px;
 }
 .headingTag {
   background: linear-gradient(
