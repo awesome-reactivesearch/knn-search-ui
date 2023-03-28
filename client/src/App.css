@@ -1,0 +1,6 @@
+@media (max-width: 500px) {
+  .hide-xs {
+    height: 0px;
+    overflow: hidden;
+  }
+}

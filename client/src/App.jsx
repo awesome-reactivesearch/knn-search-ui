@@ -11,6 +11,8 @@ import sanitize from "sanitize-html";
 
 import styles from "./App.module.css";
 
+import "./App.css";
+
 const SUGGESTION_DEBOUNCE_DELAY = 500;
 const QUERY_DEBOUNCE_DELAY = 1000;
 
@@ -86,7 +88,7 @@ function Main() {
 
       <div className="m-5">
         <h1 className="h4">KNN search with ReactiveSearch</h1>
-        <p className="w-75">
+        <p className="w-75 hide-xs">
           This demo search UI shows the use of kNN to find the most related
           items. The dataset used is of ~40,000 product reviews on Amazon. Try
           it below or see how this is built
