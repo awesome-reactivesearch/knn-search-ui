@@ -202,11 +202,8 @@ function Main() {
                 <ListGroup className={styles.list} variant="flush">
                   {data.map((item) => (
                     <ListGroup.Item key={item["Summary"]} className="py-4 px-2">
-                      <h1 className={`h3 ${styles.contentWidth}`}>
-                        {item["Summary"]}
-                      </h1>
+                      <h1 className="h3">{item["Summary"]}</h1>
                       <div
-                        className={styles.contentWidth}
                         dangerouslySetInnerHTML={{
                           __html: sanitize(item["Text"]),
                         }}

@@ -9,9 +9,6 @@
   z-index: 1;
   background-color: white;
 }
-.contentWidth {
-  max-width: 800px;
-}
 .headingTag {
   background: linear-gradient(
     30deg,
