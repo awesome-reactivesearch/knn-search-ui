@@ -9,9 +9,8 @@
   z-index: 1;
   background-color: white;
 }
-.description {
-  overflow-y: auto;
-  max-height: 300px;
+.contentWidth {
+  max-width: 800px;
 }
 .headingTag {
   background: linear-gradient(

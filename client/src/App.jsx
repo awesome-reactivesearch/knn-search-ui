@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Button, Card, Container, Navbar, Spinner } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, ListGroup, Navbar, Spinner } from "react-bootstrap";
 import {
   ReactiveBase,
   ReactiveList,
@@ -14,7 +14,6 @@ import styles from "./App.module.css";
 import "./App.css";
 
 const SUGGESTION_DEBOUNCE_DELAY = 500;
-const QUERY_DEBOUNCE_DELAY = 1000;
 
 const sampleQueries = [
   {
@@ -31,7 +30,6 @@ const sampleQueries = [
 
 function Main() {
   const [searchValue, setSearchValue] = useState("");
-  const timerRef = useRef();
 
   return (
     <ReactiveBase
@@ -107,7 +105,6 @@ function Main() {
           setSearchValue(value);
         }}
         render={({
-          error,
           data,
           downshiftProps: {
             isOpen,
@@ -202,22 +199,21 @@ function Main() {
           return (
             <div className="mx-5 my-2">
               <div className="row">
-                {data.map((item) => (
-                  <Card
-                    className={`col-md-3 col-sm-5 col-xs-12 m-1`}
-                    key={item._id}
-                  >
-                    <Card.Body>
-                      <Card.Title>{item["Summary"]}</Card.Title>
-                      <Card.Text
-                        className={styles.description}
+                <ListGroup className={styles.list} variant="flush">
+                  {data.map((item) => (
+                    <ListGroup.Item key={item["Summary"]} className="py-4 px-2">
+                      <h1 className={`h3 ${styles.contentWidth}`}>
+                        {item["Summary"]}
+                      </h1>
+                      <div
+                        className={styles.contentWidth}
                         dangerouslySetInnerHTML={{
                           __html: sanitize(item["Text"]),
                         }}
                       />
-                    </Card.Body>
-                  </Card>
-                ))}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
               </div>
             </div>
           );
