@@ -13,17 +13,17 @@ import styles from "./App.module.css";
 
 import "./App.css";
 
-const SUGGESTION_DEBOUNCE_DELAY = 500;
+const SUGGESTION_DEBOUNCE_DELAY = 50;
 
 const sampleQueries = [
   {
-    label: "Food for a young pup that doesn't eat dry food",
-    value: "Food for a young pup that doesn't eat dry food",
+    label: "Soft food recommendation for a young pup with high quality ingredients",
+    value: "soft food recommendation for a young pup with high quality ingredients",
     id: 1,
   },
   {
-    label: "Decaf coffee that's vegan friendly",
-    value: "Decaf coffee that's vegan friendly",
+    label: "Delicious decaf coffee that's value for money",
+    value: "delicious decaf coffee that's value for money",
     id: 2,
   },
 ];
